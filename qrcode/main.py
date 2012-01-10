@@ -128,28 +128,8 @@ class QRCode:
         return pattern
 
     def make_image(self):
-        """
-        Make a PIL image from the QR Code data.
-
-        If the data has not been compiled yet, make it first.
-        """
-        if self.data_cache is None:
-            self.make()
-        offset = 4   # Spec says border should be at least four boxes wide
-        pixelsize = (self.modules_count + offset * 2) * self.box_size
-
-        im = Image.new("1", (pixelsize, pixelsize), "white")
-        d = ImageDraw.Draw(im)
-
-        for r in range(self.modules_count):
-            for c in range(self.modules_count):
-                if self.modules[r][c]:
-                    x = (c + offset) * self.box_size
-                    y = (r + offset) * self.box_size
-                    b = [(x, y),
-                        (x + self.box_size - 1, y + self.box_size - 1)]
-                    d.rectangle(b, fill="black")
-        return im
+        from generators.gen_svg import make_image as mk_img
+        return mk_img(self)
 
     def setup_timing_pattern(self):
         for r in range(8, self.modules_count - 8):
