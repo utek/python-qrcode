@@ -8,6 +8,9 @@ MODE_ALPHA_NUM = 1 << 1
 MODE_8BIT_BYTE = 1 << 2
 MODE_KANJI = 1 << 3
 
+FORMAT_PNG = 0
+FORMAT_SVG = 1
+
 # Encoding mode sizes.
 MODE_SIZE_SMALL = {
     MODE_NUMBER: 10,

@@ -1,9 +1,3 @@
-# Try to import PIL in either of the two ways it can be installed.
-try:
-    from PIL import Image, ImageDraw
-except ImportError:
-    import Image, ImageDraw
-
 from qrcode import constants, exceptions, util
 
 
@@ -16,10 +10,11 @@ def make(data=None, **kwargs):
 class QRCode:
 
     def __init__(self, version=None,
-            error_correction=constants.ERROR_CORRECT_M, box_size=10):
+            error_correction=constants.ERROR_CORRECT_M, box_size=10, format=util.FORMAT_PNG):
         self.version = version and int(version)
         self.error_correction = int(error_correction)
         self.box_size = int(box_size)
+        self.format = format
         self.clear()
 
     def clear(self):
@@ -128,7 +123,10 @@ class QRCode:
         return pattern
 
     def make_image(self):
-        from generators.gen_svg import make_image as mk_img
+        if self.format == util.FORMAT_SVG:
+            from generators.gen_svg import make_image as mk_img
+        elif self.format == util.FORMAT_PNG:
+            from generators.gen_pil import make_image as mk_img
         return mk_img(self)
 
     def setup_timing_pattern(self):
