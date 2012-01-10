@@ -1,4 +1,4 @@
-# Try to import PIL in either of the two ways it can be installed.
+# Import pySVG (clean up later)
 from pysvg.filter import *
 from pysvg.linking import *
 from pysvg.script import *

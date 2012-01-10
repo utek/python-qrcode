@@ -2,8 +2,8 @@
 Pure python QR Code generator
 =============================
 
-This module uses the Python Imaging Library (PIL) to allow for the generation
-of QR Codes.
+This module uses the Python Imaging Library (PIL) or pySVG (http://codeboje.de/pysvg/)
+to allow for the generation of QR Codes.
 
 What is a QR Code?
 ==================
