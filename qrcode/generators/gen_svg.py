@@ -18,20 +18,16 @@ def make_image(qrcode):
     if qrcode.data_cache is None:
         qrcode.make()
     offset = 4   # Spec says border should be at least four boxes wide
-    pixelsize = (qrcode.modules_count + offset * 2) * qrcode.box_size
-    
-    oh2 = ShapeBuilder()
+    pixelsize = (qrcode.modules_count + offset * 2) * qrcode.box_size    
     oh = ShapeBuilder()
-    s = svg()    
-    s.addElement(oh2.createRect(0,0,pixelsize, pixelsize, strokewidth=0, fill="white"))
+    img = svg()    
+    img.addElement(oh.createRect(0,0,pixelsize, pixelsize, strokewidth=0, fill="white"))
     for r in range(qrcode.modules_count):
         for c in range(qrcode.modules_count):
             if qrcode.modules[r][c]:
                 x = (c + offset) * qrcode.box_size
-                y = (r + offset) * qrcode.box_size
-                b = [(x, y),
-                    (x + qrcode.box_size - 1, y + qrcode.box_size - 1)]
-                
-                s.addElement(oh.createRect(x,y, qrcode.box_size, qrcode.box_size,
+                y = (r + offset) * qrcode.box_size                
+                #SVG Rectangle is x, y, size_x, size_y
+                img.addElement(oh.createRect(x,y, qrcode.box_size, qrcode.box_size,
                                           strokewidth=0, fill="black"))
-    return s
+    return img
