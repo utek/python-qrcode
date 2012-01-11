@@ -14,6 +14,7 @@ setup(
     platforms=['any'],
     packages=[
         'qrcode',
+        'qrcode.generators'
     ],
     package_data={'': ['LICENSE']},
     classifiers=[
