@@ -124,10 +124,10 @@ class QRCode:
 
     def make_image(self):
         if self.format == util.FORMAT_SVG:
-            from generators.gen_svg import make_image as mk_img
+            from renderers.r_pysvg import render
         elif self.format == util.FORMAT_PNG:
-            from generators.gen_pil import make_image as mk_img
-        return mk_img(self)
+            from renderers.r_pil import render
+        return render(self)
 
     def setup_timing_pattern(self):
         for r in range(8, self.modules_count - 8):

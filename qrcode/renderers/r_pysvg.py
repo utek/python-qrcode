@@ -9,9 +9,9 @@ from pysvg.text import *
 from pysvg.builders import *
     
    
-def make_image(qrcode):
+def render(qrcode):
     """
-    Make a PIL image from the QR Code data.
+    Make a pySVG image from the QR Code data.
 
     If the data has not been compiled yet, make it first.
     """
