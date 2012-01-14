@@ -17,7 +17,7 @@ def render(qrcode):
     """
     if qrcode.data_cache is None:
         qrcode.make()
-    offset = 4   # Spec says border should be at least four boxes wide
+    offset = self.border   # Spec says border should be at least four boxes wide
     pixelsize = (qrcode.modules_count + offset * 2) * qrcode.box_size    
     oh = ShapeBuilder()
     img = svg()    
