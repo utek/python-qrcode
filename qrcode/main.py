@@ -9,7 +9,6 @@ def make(data=None, **kwargs):
 
 class QRCode:
 
-<<<<<<< HEAD
     def __init__(self, version=None,
             error_correction=constants.ERROR_CORRECT_M, box_size=10, format=util.FORMAT_PNG, border=4):
         self.version = version and int(version)
@@ -124,7 +123,6 @@ class QRCode:
 
         return pattern
 
-<<<<<<< HEAD
     def print_tty(self, out=None ):
         """
         Output the QR Code to a TTY. (usefull for debugging?)
