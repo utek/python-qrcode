@@ -5,7 +5,7 @@ except ImportError:
     import Image, ImageDraw
     
     
-def make_image(qrcode):
+def render(qrcode):
     """
     Make a PIL image from the QR Code data.
 
@@ -13,7 +13,7 @@ def make_image(qrcode):
     """
     if qrcode.data_cache is None:
         qrcode.make()
-    offset = self.border   
+    offset = qrcode.border   
     pixelsize = (qrcode.modules_count + offset * 2) * qrcode.box_size
 
     im = Image.new("1", (pixelsize, pixelsize), "white")
