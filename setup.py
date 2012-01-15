@@ -5,6 +5,8 @@ setup(
     name='qrcode',
     version='2.1',
     url='https://github.com/utek/python-qrcode',
+    maintainer='utek',
+    maintainer_email='mail@utek.pl',
     #download_url='',
     description='QR Code image generator',
     license='BSD',
@@ -14,7 +16,7 @@ setup(
     platforms=['any'],
     packages=[
         'qrcode',
-        'qrcode.generators'
+        'qrcode.renderers'
     ],
     scripts = [
         'scripts/qr',
