@@ -14,13 +14,15 @@ class QRCode(object):
         self.version = version and int(version)
         self.error_correction = int(error_correction)
         self.box_size = int(box_size)
-        #self.format = format
+        # Spec says border should be at least four boxes wide, but allow for
+        # any (e.g. for producing printable QR codes).
         self.border = border
         if renderer==None:
             from renderers.r_pil import render
             self.__class__.make_image = render
         else:
             self.__class__.make_image = renderer.render
+
         self.clear()
 
     def clear(self):
@@ -128,9 +130,9 @@ class QRCode(object):
 
         return pattern
 
-    def print_tty(self, out=None ):
+    def print_tty(self, out=None):
         """
-        Output the QR Code to a TTY. (usefull for debugging?)
+        Output the QR Code to a TTY (potentially useful for debugging).
 
         If the data has not been compiled yet, make it first.
         """
@@ -139,30 +141,23 @@ class QRCode(object):
             out = sys.stdout
 
         if not out.isatty():
-            raise OSError( "not a tty" )
+            raise OSError("Not a tty")
 
         if self.data_cache is None:
             self.make()
 
         modcount = self.modules_count
-        out.write( "\x1b[1;47m" + (" "*(modcount*2+4)) + "\x1b[0m\n" )
+        out.write("\x1b[1;47m" + (" " * (modcount * 2 + 4)) + "\x1b[0m\n")
         for r in range(modcount):
-            out.write( "\x1b[1;47m  \x1b[0m" )
+            out.write("\x1b[1;47m  \x1b[0m")
             for c in range(modcount):
                 if self.modules[r][c]:
-                    out.write( "  " )
+                    out.write("  ")
                 else:
-                    out.write( "\x1b[1;47m  \x1b[0m" )
-            out.write( "\x1b[1;47m  \x1b[0m\n" )
-        out.write( "\x1b[1;47m" + (" "*(modcount*2+4)) + "\x1b[0m\n" )
+                    out.write("\x1b[1;47m  \x1b[0m")
+            out.write("\x1b[1;47m  \x1b[0m\n")
+        out.write("\x1b[1;47m" + (" " * (modcount * 2 + 4)) + "\x1b[0m\n")
         out.flush()
-
-    #def make_image(self):
-    #    if self.format == util.FORMAT_SVG:
-    #        from renderers.r_pysvg import render
-    #    elif self.format == util.FORMAT_PNG:
-    #        from renderers.r_pil import render
-    #    return render(self)
 
     def setup_timing_pattern(self):
         for r in range(8, self.modules_count - 8):
@@ -280,4 +275,3 @@ class QRCode(object):
                     row -= inc
                     inc = -inc
                     break
-# vim: expandtab tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79:
