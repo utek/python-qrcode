@@ -155,7 +155,7 @@ class QRCode(object):
                     out.write("  ")
                 else:
                     out.write("\x1b[1;47m  \x1b[40m")
-            out.write("\x1b[1;47m  \x1b[40m\n")
+            out.write("\x1b[1;47m  \x1b[0m\n")
         out.write("\x1b[1;47m" + (" " * (modcount * 2 + 4)) + "\x1b[0m\n")
         out.flush()
 
