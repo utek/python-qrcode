@@ -3,8 +3,8 @@ try:
     from PIL import Image, ImageDraw
 except ImportError:
     import Image, ImageDraw
-    
-    
+
+
 def render(qrcode):
     """
     Make a PIL image from the QR Code data.
@@ -13,11 +13,11 @@ def render(qrcode):
     """
     if qrcode.data_cache is None:
         qrcode.make()
-    offset = qrcode.border   
+    offset = qrcode.border
     pixelsize = (qrcode.modules_count + offset * 2) * qrcode.box_size
 
     im = Image.new("1", (pixelsize, pixelsize), "white")
-    d = ImageDraw.Draw(im)    
+    d = ImageDraw.Draw(im)
     for r in range(qrcode.modules_count):
         for c in range(qrcode.modules_count):
             if qrcode.modules[r][c]:

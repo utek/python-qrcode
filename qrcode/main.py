@@ -7,20 +7,20 @@ def make(data=None, **kwargs):
     return qr.make_image()
 
 
-class QRCode:
+class QRCode(object):
 
     def __init__(self, version=None,
             error_correction=constants.ERROR_CORRECT_M, box_size=10, renderer=None, border=4):
         self.version = version and int(version)
         self.error_correction = int(error_correction)
         self.box_size = int(box_size)
-        self.format = format
+        #self.format = format
         self.border = border
         if renderer==None:
             from renderers.r_pil import render
-            self.make_image = render
+            self.__class__.make_image = render
         else:
-            self.make_image = renderer.render
+            self.__class__.make_image = renderer.render
         self.clear()
 
     def clear(self):
