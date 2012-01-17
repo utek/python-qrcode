@@ -10,12 +10,17 @@ def make(data=None, **kwargs):
 class QRCode:
 
     def __init__(self, version=None,
-            error_correction=constants.ERROR_CORRECT_M, box_size=10, format=util.FORMAT_PNG, border=4):
+            error_correction=constants.ERROR_CORRECT_M, box_size=10, renderer=None, border=4):
         self.version = version and int(version)
         self.error_correction = int(error_correction)
         self.box_size = int(box_size)
         self.format = format
         self.border = border
+        if renderer==None:
+            from renderers.r_pil import render
+            self.make_image = render
+        else:
+            self.make_image = renderer.render
         self.clear()
 
     def clear(self):
@@ -152,12 +157,12 @@ class QRCode:
         out.write( "\x1b[1;47m" + (" "*(modcount*2+4)) + "\x1b[0m\n" )
         out.flush()
 
-    def make_image(self):
-        if self.format == util.FORMAT_SVG:
-            from renderers.r_pysvg import render
-        elif self.format == util.FORMAT_PNG:
-            from renderers.r_pil import render
-        return render(self)
+    #def make_image(self):
+    #    if self.format == util.FORMAT_SVG:
+    #        from renderers.r_pysvg import render
+    #    elif self.format == util.FORMAT_PNG:
+    #        from renderers.r_pil import render
+    #    return render(self)
 
     def setup_timing_pattern(self):
         for r in range(8, self.modules_count - 8):
