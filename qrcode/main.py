@@ -19,9 +19,9 @@ class QRCode(object):
         self.border = border
         if renderer==None:
             from renderers.r_pil import render
-            self.__class__.make_image = render
+            self.make_image = render.__get__(self)
         else:
-            self.__class__.make_image = renderer.render
+            self.make_image = renderer.render.__get__(self)
 
         self.clear()
 
