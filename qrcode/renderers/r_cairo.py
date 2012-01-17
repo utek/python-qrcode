@@ -1,0 +1,23 @@
+#Cairo renderer placeholder
+
+
+def render(qrcode):
+    """
+    Cairo placeholder
+    """
+    if qrcode.data_cache is None:
+        qrcode.make()
+    offset = qrcode.border
+    pixelsize = (qrcode.modules_count + offset * 2) * qrcode.box_size
+
+    #im = Image.new("1", (pixelsize, pixelsize), "white")
+    #d = ImageDraw.Draw(im)
+    for r in range(qrcode.modules_count):
+        for c in range(qrcode.modules_count):
+            if qrcode.modules[r][c]:
+                x = (c + offset) * qrcode.box_size
+                y = (r + offset) * qrcode.box_size
+                b = [(x, y),
+                    (x + qrcode.box_size - 1, y + qrcode.box_size - 1)]
+                #d.rectangle(b, fill="black")
+    return None
