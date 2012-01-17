@@ -17,7 +17,7 @@ class QRCode(object):
         # Spec says border should be at least four boxes wide, but allow for
         # any (e.g. for producing printable QR codes).
         self.border = border
-        if renderer==None:
+        if renderer is None:
             from renderers.r_pil import render
             self.make_image = render.__get__(self)
         else:
