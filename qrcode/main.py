@@ -67,7 +67,7 @@ class QRCode(object):
         self.setup_position_probe_pattern(0, 0)
         self.setup_position_probe_pattern(self.modules_count - 7, 0)
         self.setup_position_probe_pattern(0, self.modules_count - 7)
-        self.sutup_position_adjust_pattern()
+        self.setup_position_adjust_pattern()
         self.setup_timing_pattern()
         self.setup_type_info(test, mask_pattern)
 
@@ -170,7 +170,7 @@ class QRCode(object):
                 continue
             self.modules[6][c] = (c % 2 == 0)
 
-    def sutup_position_adjust_pattern(self):
+    def setup_position_adjust_pattern(self):
         pos = util.pattern_position(self.version)
 
         for i in range(len(pos)):
