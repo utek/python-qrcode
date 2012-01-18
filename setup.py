@@ -3,7 +3,8 @@ from distutils.core import setup
 
 setup(
     name='qrcode',
-    version='2.1',
+<<<<<<< HEAD
+    version='2.2',
     url='https://github.com/utek/python-qrcode',
     maintainer='utek',
     maintainer_email='mail@utek.pl',
