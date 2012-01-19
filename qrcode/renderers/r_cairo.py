@@ -62,7 +62,7 @@ def render_pdf(qrcode):
     import io
     stream = io.BytesIO()
     offset, pixelsize = prepare(qrcode)
-    surface = cairo.SVGSurface(stream, pixelsize, pixelsize)
+    surface = cairo.PDFSurface(stream, pixelsize, pixelsize)
     surface = make(qrcode, surface, pixelsize, offset)
     surface.finish()
     stream.seek(0)
