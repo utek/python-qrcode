@@ -2,6 +2,12 @@
 Change log
 ==========
 
+Version 2.3
+===========
+
+* Added Cairo renderers <Image, SVG, PDF> (using pycairo)
+
+* Added SVG renderers (pySVG)
 
 Version 2.2
 ===========
