@@ -21,7 +21,14 @@ class QRCode(object):
             from renderers.r_pil import render
             self.make_image = render.__get__(self)
         else:
-            self.make_image = renderer.render.__get__(self)
+            import types
+            if type(renderer) is types.ModuleType:
+                self.make_image = renderer.render.__get__(self)
+            elif type(renderer) is types.FunctionType:
+                self.make_image = renderer.__get__(self)
+            else: #fallback to PIL
+                from renderers.r_pil import render
+                self.make_image = render.__get__(self)
 
         self.clear()
 

@@ -32,6 +32,7 @@ def render_image(qrcode):
     """
     Make a cairo ImageSurface version of QRCode
 
+    return cairo ImageSurface
     """
     offset, pixelsize = prepare(qrcode)
     surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, pixelsize, pixelsize)
@@ -39,12 +40,33 @@ def render_image(qrcode):
 
 def render_svg(qrcode):
     """
-    Make a cairo ImageSurface version of QRCode
+    Make a cairo SVGSurface version of QRCode
+    return stream (io.BytesIO)
 
     """
+    import io
+    stream = io.BytesIO()
     offset, pixelsize = prepare(qrcode)
-    print offset, pixelsize
-    surface = cairo.SVGSurface(None, pixelsize, pixelsize)
-    return make(qrcode, surface, pixelsize, offset)
+    surface = cairo.SVGSurface(stream, pixelsize, pixelsize)
+    surface = make(qrcode, surface, pixelsize, offset)
+    surface.finish()
+    stream.seek(0)
+    return stream
 
-render = render_image
+def render_pdf(qrcode):
+    """
+    Make a cairo SVGSurface version of QRCode
+    return stream (io.BytesIO)
+
+    """
+    import io
+    stream = io.BytesIO()
+    offset, pixelsize = prepare(qrcode)
+    surface = cairo.SVGSurface(stream, pixelsize, pixelsize)
+    surface = make(qrcode, surface, pixelsize, offset)
+    surface.finish()
+    stream.seek(0)
+    return stream
+
+#default renderer
+render = render_svg
