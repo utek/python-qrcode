@@ -66,12 +66,13 @@ The ``border`` parameter controls how many boxes thick the border should be
 
 The ``renderer`` parameter controls which how qrcode is drawn.
 Available renderers:
-``qrcode.renderers.r_pil`` (default)
-    PIL renderer.
-``qrcode.renderers.r_pysvg``
-    pySVG renderer.
-``qrcode.renderers.r_cairo``
-    Cairo renderer. Available formats:
-        ``render_svg`` (default)
-        ``render_pdf``
-        ``render_image``
+
+- ``qrcode.renderers.r_pil`` (default)
+  PIL renderer.
+- ``qrcode.renderers.r_pysvg``
+  pySVG renderer.
+- ``qrcode.renderers.r_cairo``
+  Cairo renderer. Available formats:
+  ``render_svg`` (default)
+  ``render_pdf``
+  ``render_image``
