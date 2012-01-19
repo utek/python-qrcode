@@ -55,7 +55,7 @@ package:
     About 15% or less errors can be corrected.
 ``ERROR_CORRECT_Q``
     About 25% or less errors can be corrected.
-``ERROR_CORRECT_H``.
+``ERROR_CORRECT_H``
     About 30% or less errors can be corrected.
 
 The ``box_size`` parameter controls how many pixels each "box" of the QR code
@@ -64,6 +64,15 @@ is.
 The ``border`` parameter controls how many boxes thick the border should be
 (the default is 4, which is the minimum according to the specs).
 
-The ``renderer`` parameter controls which how qrcode is drawn. Default is
-``qrcode.renderers.r_pil`` - PIL renderer. Other availble is
-``qrcode.renderers.r_pysvg``.
+The ``renderer`` parameter controls which how qrcode is drawn.
+Available renderers:
+
+- ``qrcode.renderers.r_pil`` (default)
+  PIL renderer.
+- ``qrcode.renderers.r_pysvg``
+  pySVG renderer.
+- ``qrcode.renderers.r_cairo``
+  Cairo renderer. Available formats:
+  ``render_svg`` (default)
+  ``render_pdf``
+  ``render_image``

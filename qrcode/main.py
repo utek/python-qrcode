@@ -21,7 +21,14 @@ class QRCode(object):
             from renderers.r_pil import render
             self.make_image = render.__get__(self)
         else:
-            self.make_image = renderer.render.__get__(self)
+            import types
+            if type(renderer) is types.ModuleType:
+                self.make_image = renderer.render.__get__(self)
+            elif type(renderer) is types.FunctionType:
+                self.make_image = renderer.__get__(self)
+            else: #fallback to PIL
+                from renderers.r_pil import render
+                self.make_image = render.__get__(self)
 
         self.clear()
 
@@ -147,7 +154,7 @@ class QRCode(object):
             self.make()
 
         modcount = self.modules_count
-        out.write("\x1b[1;47m" + (" " * (modcount * 2 + 4)) + "\x1b[40m\n")
+        out.write("\x1b[1;47m" + (" " * (modcount * 2 + 4)) + "\x1b[0m\n")
         for r in range(modcount):
             out.write("\x1b[1;47m  \x1b[40m")
             for c in range(modcount):
