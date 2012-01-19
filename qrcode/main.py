@@ -154,7 +154,7 @@ class QRCode(object):
             self.make()
 
         modcount = self.modules_count
-        out.write("\x1b[1;47m" + (" " * (modcount * 2 + 4)) + "\x1b[40m\n")
+        out.write("\x1b[1;47m" + (" " * (modcount * 2 + 4)) + "\x1b[0m\n")
         for r in range(modcount):
             out.write("\x1b[1;47m  \x1b[40m")
             for c in range(modcount):
