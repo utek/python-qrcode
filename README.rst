@@ -22,6 +22,10 @@ Use the ``make`` shortcut function::
     import qrcode
     img = qrcode.make('Some data here')
 
+    #using renderes
+    from qrcode.renderes import r_cairo
+    img = qrcode.make('Some data here', renderer=r_cairo.render_pdf)
+
 Advanced Usage
 --------------
 
@@ -32,13 +36,43 @@ For more control, use the ``QRCode`` class. For example::
         version=1,
         error_correction=constants.ERROR_CORRECT_L,
         box_size=10,
-        border=4,
-        renderer=qrcode.renderers.r_pil
+        border=4
     )
     qr.add_data('Some data')
     qr.make(fit=True)
 
     img = qr.make_image()
+
+
+Using renderes::
+
+    import qrcode
+    from qrcode.renderers import r_pil, r_pysvg, r_cairo
+
+    #pysvg
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+        renderer=qrcode.renderers.r_pysvg
+    )
+    qr.add_data('Some data')
+    qr.make(fit=True)
+    img = qr.make_image()
+
+    #cairo - PDF
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+        renderer=r_cairo.render_pdf
+    )
+    qr.add_data('Some data')
+    qr.make(fit=True)
+    img = qr.make_image() #img is io.ByteIO stream
+
 
 The ``version`` parameter is an integer from 1 to 40 that controls the size of
 the QR Code (the smallest, version 1, is a 21x21 matrix).
@@ -68,11 +102,11 @@ The ``renderer`` parameter controls which how qrcode is drawn.
 Available renderers:
 
 - ``qrcode.renderers.r_pil`` (default)
-  PIL renderer.
+    PIL renderer.
 - ``qrcode.renderers.r_pysvg``
-  pySVG renderer.
+    pySVG renderer.
 - ``qrcode.renderers.r_cairo``
-  Cairo renderer. Available formats:
-  ``render_svg`` (default)
-  ``render_pdf``
-  ``render_image``
+    Cairo renderer. Available formats:
+        - ``render_svg`` (default)
+        - ``render_pdf``
+        - ``render_image``
