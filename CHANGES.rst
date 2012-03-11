@@ -9,6 +9,19 @@ Version 2.3
 
 * Added SVG renderers (pySVG)
 
+Version 2.3.1
+=============
+
+* Encode unicode to utf-8 bytestrings when adding data to a QRCode.
+
+
+Version 2.3
+===========
+
+* When adding data, auto-select the more efficient encoding methods for numbers
+  and alphanumeric data (KANJI still not supported).
+
+
 Version 2.2
 ===========
 
