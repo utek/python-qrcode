@@ -15,7 +15,7 @@ def render(qrcode):
     # pysvg backward compatibility fix
     try:
         img = svg()
-    except ImportError:
+    except NameError:
         img = Svg()
     img.addElement(oh.createRect(0,0,pixelsize, pixelsize, strokewidth=0, fill="white"))
     for r in range(qrcode.modules_count):
