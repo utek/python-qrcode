@@ -1,11 +1,3 @@
-# Import pySVG (clean up later)
-from pysvg.filter import *
-from pysvg.linking import *
-from pysvg.script import *
-from pysvg.shape import *
-from pysvg.structure import *
-from pysvg.style import *
-from pysvg.text import *
 from pysvg.builders import *
 
 
@@ -20,7 +12,11 @@ def render(qrcode):
     offset = qrcode.border   # Spec says border should be at least four boxes wide
     pixelsize = (qrcode.modules_count + offset * 2) * qrcode.box_size
     oh = ShapeBuilder()
-    img = svg()
+    # pysvg backward compatibility fix
+    try:
+        img = svg()
+    except ImportError:
+        img = Svg()
     img.addElement(oh.createRect(0,0,pixelsize, pixelsize, strokewidth=0, fill="white"))
     for r in range(qrcode.modules_count):
         for c in range(qrcode.modules_count):
